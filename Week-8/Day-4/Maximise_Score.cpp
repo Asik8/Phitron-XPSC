@@ -5,7 +5,7 @@ using namespace std;
 #define py cout<<"YES\n";
 #define pn cout<<"NO\n";
 #define co(x1) cout<<x1<<"\n";
-#define f(x1,x2,x3) for(int x1=x2;x1<x3;)
+#define f(x1,x2,x3) for(int x1=x2;x1<x3;x1++)
 #define fr(x1,x2,x3) for(int x1=x2;x1>=x3;x1--)
 #define forni for(int i=0;i<n;i++)
 
@@ -15,15 +15,17 @@ int main() {
     ll t;
     cin >> t;
     while (t--) {
-        ll n,z=0,o=0;
+        ll n;
         cin >> n;
-        string s;
-        cin>>s;
-        for(auto x:s){
-            if(x=='1') o++;
-            else z++;
+        vector <ll> v(n);
+        ll ans=INT_MAX;
+        for (auto& x:v) cin >>x;  
+        ans=min(ans,llabs(v[0]-v[1]));
+        ans=min(ans,llabs(v[n-1]-v[n-2]));
+        for(int i=1;i<n-1;i++){
+            ans=min(ans,max(llabs(v[i]-v[i+1]),llabs(v[i]-v[i-1])));
         }
-        if(min(z,o)%2) co("Zlatan") else co("Ramos")  
+        co(ans);
     }
     return 0;
 }
